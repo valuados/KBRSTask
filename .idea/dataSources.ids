@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="Sqlite (Xerial) - data1.db" uuid="964d0ab4-1ede-43a7-9f7b-1185d399af81">
+    <database-info product="SQLite" version="3.8.11" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native"/>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed"/>
+    <schema name="" catalog=""/>
+    <table name="details" schema="" catalog="" type="TABLE">
+      <column name="INVOICE_ID" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="INVOICER_NAME" sqlType="VARCHAR" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="INVOICER_EMAIL" sqlType="VARCHAR" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="INVOICER_ADDRESS" sqlType="VARCHAR" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <column name="ITEMS_ID" sqlType="TEXT" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <primary-key columns="invoice_id"/>
+      <foreign-key name="#FAKE_details_1" columns="INVOICE_ID" ref-table="invoice" ref-schema="" ref-catalog="" ref-columns="INVOICE_ID" update-rule="3" delete-rule="0" deferrability="1"/>
+    </table>
+    <table name="invoice" schema="" catalog="" type="TABLE">
+      <column name="INVOICE_ID" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="INVOICE_DATE" sqlType="DATE" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <column name="INVOICE_STATUS" sqlType="VARCHAR" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <column name="INVOICE_TOTAL" sqlType="DOUBLE" precision="0" scale="-1" nullable="false" jdbcType="6"/>
+      <primary-key columns="invoice_id"/>
+    </table>
+    <table name="sqlite_sequence" schema="" catalog="" type="TABLE">
+      <column name="name" sqlType="" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <column name="seq" sqlType="" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+    </table>
+    <table name="user" schema="" catalog="" type="TABLE">
+      <column name="USER_ID" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="USER_NAME" sqlType="VARCHAR" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="USER_PASSWORD" sqlType="VARCHAR" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="USER_EMAIL" sqlType="VARCHAR" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="USER_TYPE" sqlType="BOOLEAN" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <primary-key columns="user_id"/>
+    </table>
+  </data-source>
+</component>
