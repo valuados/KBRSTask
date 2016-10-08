@@ -98,6 +98,11 @@ public class UpdateUsername extends HttpServlet {
 
                 break;
         }
+        try {
+            conn.close();
+        } catch(SQLException e ){
+            e.printStackTrace();
+        }
 
     }
 

@@ -35,17 +35,21 @@
     if(id != null) {
         conn.createStatement().executeUpdate("UPDATE user set USER_TYPE=0 WHERE USER_ID="+id);
     }
-
+    conn.close();
+    conn = connectionGiver.getInstance().getConnection();
     ArrayList<User> data=new ArrayList<User>();
     try {
         ResultSet rs = conn.createStatement().executeQuery("SELECT * from user");
         while(rs.next()){
             data.add(new User(rs));
         }
+        conn.close();
     } catch (Exception e) {
         System.out.println(e.toString());
         e.printStackTrace();
     }
+    conn = connectionGiver.getInstance().getConnection();
+
 %>
 <p class="display-user-data">
 <h2>Users</h2>
