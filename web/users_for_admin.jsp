@@ -36,8 +36,6 @@
         conn.createStatement().executeUpdate("UPDATE user set USER_TYPE=0 WHERE USER_ID="+id);
     }
 
-    Map<String,Object> map;
-    map = (HashMap<String,Object>) request.getSession().getAttribute("user");
     ArrayList<User> data=new ArrayList<User>();
     try {
         ResultSet rs = conn.createStatement().executeQuery("SELECT * from user");
