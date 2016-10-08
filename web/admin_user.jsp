@@ -28,8 +28,6 @@
 </head>
 <body>
 <%
-    Map<String,Object> map;
-    map = (HashMap<String,Object>) request.getSession().getAttribute("user");
     ArrayList<Details> data=new ArrayList<Details>();
     try {
         ResultSet rs = conn.createStatement().executeQuery("SELECT det.INVOICE_ID, " +
