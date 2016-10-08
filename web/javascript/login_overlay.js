@@ -21,8 +21,7 @@ $(document).ready(function(){
             dataType: 'json',
             data:{id: "log",login: login, pass: password},
             success: function(data){
-                var undefined = "undefined";
-                if(data[0].userName==undefined){
+                if(!data[0].userName){
                     $('#login').replaceWith("<input class = 'redinput' id='login' type='text' size='20'>");
                     $('#password').replaceWith("<input class = 'redinput' id='password' type='password' size='20'>")
                     $('p.fail').html('<h1 style="color:white;">Your username or password is incorect!</h1>');
@@ -33,13 +32,12 @@ $(document).ready(function(){
                         document.location.href="/admin_user.jsp";
                     else
                         document.location.href="/logged_user.jsp";
-
                 }
             }
         });
         return false;
-    })
-})
+    });
+});
 function  checkLogin() {
 
 

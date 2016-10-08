@@ -7,6 +7,11 @@
         <element id="directory" name="classes">
           <element id="module-output" name="Ajax request" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="gson-2.2.2" />
+          <element id="library" level="project" name="sqlite-jdbc-3.8.11.2" />
+          <element id="library" level="project" name="jstl" />
+        </element>
       </element>
     </root>
   </artifact>

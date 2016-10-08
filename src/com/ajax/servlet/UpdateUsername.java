@@ -1,5 +1,6 @@
 package com.ajax.servlet;
 
+import com.ajax.utils.User;
 import com.ajax.utils.connectionGiver;
 import com.google.gson.Gson;
 
@@ -25,10 +26,9 @@ public class UpdateUsername extends HttpServlet {
         super();
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         Connection conn = connectionGiver.getInstance().getConnection();
         String sw;
-        sw = new String(request.getParameter("id"));
+        sw = (String) request.getParameter("id");
         ArrayList<Map<String,Object>> arr;
         Map<String,Object>map;
         String userName;
@@ -74,28 +74,22 @@ public class UpdateUsername extends HttpServlet {
 
                 arr=new ArrayList<>();
                 try {
-                    ResultSet rs = conn.createStatement().executeQuery("SELECT user_name," +
-                            " user_email, user_type FROM user WHERE user_name = '"+
+                    ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM user WHERE user_name = '"+
                             userName+"' AND user_password = '"+ userPassword+ "';");
+                    User u = null;
                     if(rs.next()){
+                        u = new User(rs);
                         map= new HashMap<>();
-                        map.put("userName", rs.getString(1));
-                        map.put("userEmail", rs.getString(2));
-                        map.put("userType", rs.getBoolean(3));
-
+                        map.put("userName", rs.getString(2));
+                        map.put("userEmail", rs.getString(4));
+                        map.put("userType", rs.getBoolean(5));
                         arr.add(map);
 
-                    }
-                    else{
+                    } else {
                         map= new HashMap<>();
-                        map.put("userName", "undefined");
-                        map.put("userPassword", "undefined");
-                        map.put("userEmail", "undefined");
-                        map.put("userType", "undefined");
-
                         arr.add(map);
                     }
-                    request.getSession().setAttribute("user", map);
+                    request.getSession().setAttribute("user", u);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

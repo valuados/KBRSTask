@@ -3,6 +3,7 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ page import="com.ajax.utils.Details" %>
 <%@ page import="com.ajax.utils.connectionGiver" %>
+<%@include file="redirect_not_logged.jsp"%>
 <html>
 <head>
     <meta charset="utf-8">
@@ -17,15 +18,15 @@
 </head>
 <body>
 <%
-    Map<String,Object> map;
-    map = (HashMap<String,Object>) request.getSession().getAttribute("user");
+    User u;
+    u = (User) request.getSession().getAttribute("user");
     ArrayList<Details> data=new ArrayList<Details>();
     Connection conn = connectionGiver.getInstance().getConnection();
     try {
         ResultSet rs = conn.createStatement().executeQuery("SELECT det.INVOICE_ID, " +
                 "INVOICER_NAME, INVOICER_EMAIL" +
                 ", INVOICER_ADDRESS, INVOICE_STATUS, INVOICE_TOTAL" +
-                " from details det, invoice inv where det.INVOICE_ID=inv.INVOICE_ID");
+                " from details det, invoice inv where det.INVOICE_ID=inv.INVOICE_ID AND det.INVOICER_EMAIL="+u.mail);
         while(rs.next()){
             Details extra = new Details();
             extra.setId(rs.getInt(1));
@@ -42,7 +43,7 @@
     }
 %>
 <p class="display-user-data">
-<h2>Orders</h2>
+<h2>Your orders</h2>
 
     <ol>
 

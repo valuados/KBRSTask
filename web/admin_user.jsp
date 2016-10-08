@@ -3,6 +3,17 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ page import="com.ajax.utils.Details" %>
 <%@ page import="com.ajax.utils.connectionGiver" %>
+<%@include file="redirect_not_logged.jsp"%>
+<%@include file="redirect_not_admin.jsp"%>
+<%
+
+    Connection conn = connectionGiver.getInstance().getConnection();
+    String dltDetail = (String) request.getParameter("delete_detail_id");
+    if(dltDetail != null) {
+        conn.createStatement().executeUpdate("DELETE from details where invoice_id="+dltDetail);
+        conn.createStatement().executeUpdate("DELETE from invoice where invoice_id="+dltDetail);
+    }
+%>
 <html>
 <head>
     <meta charset="utf-8">
@@ -20,7 +31,6 @@
     Map<String,Object> map;
     map = (HashMap<String,Object>) request.getSession().getAttribute("user");
     ArrayList<Details> data=new ArrayList<Details>();
-    Connection conn = connectionGiver.getInstance().getConnection();
     try {
         ResultSet rs = conn.createStatement().executeQuery("SELECT det.INVOICE_ID, " +
                 "INVOICER_NAME, INVOICER_EMAIL" +
@@ -68,7 +78,7 @@
                 </div>
             </tr>
             <tr>
-                <button class="delete">DELETE</button>
+                <form method="POST"><button class="delete" name="delete_detail_id" value="<%=detail.getId()%>">DELETE</button></form>
             </tr>
         </td>
     </table>
@@ -77,9 +87,8 @@
     <%
         }
     %>
-
 </ol>
-
+<a href="/users_for_admin.jsp">Proceed to Users Control Page</a>
 </p>
 </body>
 </html>
